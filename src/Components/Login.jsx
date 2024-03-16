@@ -1,13 +1,21 @@
 import { checkValidateData } from "../utils/validate";
 import Header from "./Header";
 import { useRef, useState } from "react";
+import {  createUserWithEmailAndPassword, updateProfile  } from "firebase/auth"
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../utils/firebase";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+ 
 
 const Login = () => {
+
   const [isSignInForm, setisSignInForm] = useState(true);
-  const [errorMsg, seterrorMsg] = useState(null);
-  // const [name, setName] = useState(false)
-  
-  const name = useRef(null)
+  const [errorMsg, setErrorMsg] = useState(null);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const name = useRef(null);
   const email = useRef(null);
   const password = useRef(null);
 
@@ -17,20 +25,92 @@ const Login = () => {
 
     // console.log(email);
     // console.log(password);
-    console.log(name.current.value);
+    // console.log(name.current.value);
     console.log(email.current.value);
     console.log(password.current.value);
 
     const massage = checkValidateData(
-      
       email.current.value,
       password.current.value,
-      name.current.value,
+      // name.current.value,
       // setName(!name.current.value)
-      
     );
     //  console.log(massage);
-    seterrorMsg(massage);
+    setErrorMsg(massage);
+    if (massage) return; // if massage is present means it have some error so it will return it. Other wise go ahead
+
+    //Sign In  Sign UP Logic Below
+
+    if (!isSignInForm) {
+      //if my SignIn form is not present then do Sign Up form else go to the Sign In Logic
+      // Sign Up Logic
+      
+      createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
+        .then((userCredential) => {
+          // Signed up
+          const user = userCredential.user;
+          console.log(user);
+
+          
+updateProfile(user, {
+  displayName: name.current.value,
+  photoURL: "https://avatars.githubusercontent.com/u/127420714?v=4"
+}).then(() => {
+  const {uid, email, displayName, photoURL} = auth.currentUser;
+  // eslint-disable-next-line no-undef
+  dispatch(addUser({
+    uid: uid,
+    email: email,
+    displayName: displayName,
+    photoURL:photoURL,
+  }));
+  navigate("/browse")
+  // ...
+}).catch((error) => {
+  // An error occurred
+ setErrorMsg(error.message)
+  // ...
+});
+        
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMsg(errorCode+ "-" +errorMessage )
+          // ..
+        });
+    } 
+    
+    else {
+      // SignIn Logic
+
+    
+
+
+signInWithEmailAndPassword(auth, email.current.value, password.current.value)
+  .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    console.log(user);
+    navigate("/browse")
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+
+    setErrorMsg(errorCode+ "-" +errorMessage)
+  });
+
+
+
+
+
+
+
+
+    }
   };
 
   const toggleSignUpForm = () => {
