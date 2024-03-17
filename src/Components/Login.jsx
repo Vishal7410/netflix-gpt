@@ -1,19 +1,19 @@
 import { checkValidateData } from "../utils/validate";
 import Header from "./Header";
 import { useRef, useState } from "react";
-import {  createUserWithEmailAndPassword, updateProfile  } from "firebase/auth"
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import {  signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
- 
+import { bgcImage, userAvtar } from "../utils/constants";
+import { addUser } from "../utils/userSlice";
 
 const Login = () => {
-
   const [isSignInForm, setisSignInForm] = useState(true);
   const [errorMsg, setErrorMsg] = useState(null);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const name = useRef(null);
   const email = useRef(null);
@@ -31,7 +31,7 @@ const Login = () => {
 
     const massage = checkValidateData(
       email.current.value,
-      password.current.value,
+      password.current.value
       // name.current.value,
       // setName(!name.current.value)
     );
@@ -44,72 +44,69 @@ const Login = () => {
     if (!isSignInForm) {
       //if my SignIn form is not present then do Sign Up form else go to the Sign In Logic
       // Sign Up Logic
-      
-      createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
+
+      createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
         .then((userCredential) => {
           // Signed up
           const user = userCredential.user;
-          console.log(user);
+        //  console.log(user);
 
-          
-updateProfile(user, {
-  displayName: name.current.value,
-  photoURL: "https://avatars.githubusercontent.com/u/127420714?v=4"
-}).then(() => {
-  const {uid, email, displayName, photoURL} = auth.currentUser;
-  // eslint-disable-next-line no-undef
-  dispatch(addUser({
-    uid: uid,
-    email: email,
-    displayName: displayName,
-    photoURL:photoURL,
-  }));
-  navigate("/browse")
-  // ...
-}).catch((error) => {
-  // An error occurred
- setErrorMsg(error.message)
-  // ...
-});
-        
+          updateProfile(user, {
+            displayName: name.current.value,
+            photoURL: userAvtar
+            
+          })
+            .then(() => {
+              const { uid, email, displayName, photoURL } = auth.currentUser;
+              // eslint-disable-next-line no-undef
+              dispatch(
+                addUser({
+                  uid: uid,
+                  email: email,
+                  displayName: displayName,
+                  photoURL: photoURL,
+                })
+              );
+            })
+            .catch((error) => {
+              // An error occurred
+              setErrorMsg(error.message);
+              // ...
+            });
+
           // ...
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
-          setErrorMsg(errorCode+ "-" +errorMessage )
+          setErrorMsg(errorCode + "-" + errorMessage);
           // ..
         });
-    } 
-    
-    else {
+    } else {
       // SignIn Logic
 
-    
+      signInWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          console.log(user);
+         
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
 
-
-signInWithEmailAndPassword(auth, email.current.value, password.current.value)
-  .then((userCredential) => {
-    // Signed in 
-    const user = userCredential.user;
-    console.log(user);
-    navigate("/browse")
-    // ...
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-
-    setErrorMsg(errorCode+ "-" +errorMessage)
-  });
-
-
-
-
-
-
-
-
+          setErrorMsg(errorCode + "-" + errorMessage);
+        });
     }
   };
 
@@ -121,7 +118,7 @@ signInWithEmailAndPassword(auth, email.current.value, password.current.value)
       <Header />
       <div className="absolute">
         <img
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/93da5c27-be66-427c-8b72-5cb39d275279/94eb5ad7-10d8-4cca-bf45-ac52e0a052c0/IN-en-20240226-popsignuptwoweeks-perspective_alpha_website_large.jpg"
+          src={bgcImage}
           alt="Background Img "
         />
       </div>
