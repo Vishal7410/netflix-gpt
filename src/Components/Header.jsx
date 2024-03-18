@@ -31,11 +31,12 @@ import { Logo } from "../utils/constants";
           photoURL:photoURL,
         })
         );
-        navigate("/browse")
+         navigate("/browse")
       }
       else {
         dispatch(removeUser());
-        navigate("/")
+       
+         navigate("/")
        
       }
     } )
