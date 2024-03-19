@@ -4,7 +4,6 @@ import { useRef, useState } from "react";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import {  signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { bgcImage, userAvtar } from "../utils/constants";
 import { addUser } from "../utils/userSlice";

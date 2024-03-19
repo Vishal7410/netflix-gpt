@@ -17,7 +17,7 @@ import { Logo } from "../utils/constants";
   // An error happened.
   console.log(error);
    });
-    }
+    };
 
   useEffect(() => {
    const unsubscribe = onAuthStateChanged(auth, (user) => {  // whenever the user logged in or logout it will track all the records of  auth
@@ -29,25 +29,17 @@ import { Logo } from "../utils/constants";
           email: email,
           displayName: displayName,
           photoURL:photoURL,
-        })
-        );
-         navigate("/browse")
-      }
-      else {
+        }) 
+        );   
+        navigate("/browse")
+      } else {
         dispatch(removeUser());
-       
-         navigate("/")
-       
+        navigate("/")      
       }
-    } )
+    });
 // Unsubscribe called when component unmount 
     return () => unsubscribe();
   }, [])
-
-
-
-
-
 
 
   return (
