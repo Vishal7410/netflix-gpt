@@ -1,5 +1,7 @@
 import useNowPlayingMovies from '../Hooks/useNowPlayingMovies'
 import usePopularMovies from '../Hooks/usePopularMovies';
+import useTrending from '../Hooks/useTopRated';
+import useUpcomingMovies from '../Hooks/useUpcomingMovies';
 import Header from './Header'
 import MainContainer from './MainContainer';
 import SecoundaryContainer from './SecoundaryContainer';
@@ -10,6 +12,8 @@ const Browse = () => {
   
   useNowPlayingMovies();
   usePopularMovies();
+  useTrending();
+  useUpcomingMovies();
 
   
   return (

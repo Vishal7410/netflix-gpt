@@ -3,6 +3,7 @@ import { API_OPTION } from "../utils/constants";
 import { addNowPlayingMovies } from "../utils/movieSlice";
 import { useEffect } from "react";
 
+// initially Create
 
 const useNowPlayingMovies = () => {
 
@@ -14,7 +15,7 @@ const useNowPlayingMovies = () => {
     API_OPTION
     );
     const json = await data.json()
-     console.log(json.results);
+    //  console.log(json.results);
     dispatch(addNowPlayingMovies(json.results))
   };
 

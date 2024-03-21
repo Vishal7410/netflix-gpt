@@ -17,11 +17,11 @@ const VideoBackground = ({ movieId }) => {
      */
 
     <div className=" w-screen">
-      <iframe
+      {/* <iframe
         className="w-screen aspect-video" //100%
         // src="https://www.youtube.com/embed/d2OONzqh2jk"     // rough "d2OONzqh2jk"
 
-        src={"https://www.youtube.com/embed/"+trailerVideo?.key } //+"?autoplay=1&mute=1"
+        src={"https://www.youtube.com/embed/"+trailerVideo?.key +"?autoplay=1&mute=1"}
         title="YouTube video player"
         // frameborder="0" Always write these in camel case
         frameBorder="0" //like these otherwise it will through an error
@@ -29,6 +29,18 @@ const VideoBackground = ({ movieId }) => {
         // allowfullscreen These is also write in the camel case
         allowFullScreen
         
+      ></iframe> */}
+
+      <iframe
+      className="w-screen aspect-video"
+        // width="560"
+        // height="315"
+        src={"https://www.youtube.com/embed/"+trailerVideo?.key+"?autoplay=1&mute=1"}
+        title="YouTube video player"
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerPolicy="strict-origin-when-cross-origin"
+        allowFullScreen
       ></iframe>
     </div>
   );
