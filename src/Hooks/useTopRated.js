@@ -20,8 +20,6 @@ const useTopRated = () => {
 
   useEffect(()=> {
     getTopRated()
-  },[])
-
-  
+  },[]) 
 }
 export default useTopRated 
