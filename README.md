@@ -36,7 +36,10 @@
 - Made the Browser page amazing with Tailwind CSS
 - usePopular Movies Custom hooks
 - GPT Search Feature
-- Made it Multi language app 
+   - gpt Search Page
+   - Gpt Search Bar
+- (BONUS) Multi-language Feature in our App 
+- Integrate GPT APIS, GPT(get OpenApi key)
 
 
 # Features

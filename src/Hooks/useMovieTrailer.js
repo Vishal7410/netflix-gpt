@@ -1,11 +1,13 @@
 import { useEffect } from "react";
 import { addTrailerVideo } from "../utils/movieSlice";
 import { API_OPTION } from "../utils/constants";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 // initially Create
 
 const useMovieTrailer = () => {
+  const trailerVideo = useSelector(store => store.movies.trailerVideo)
+
 
      // const [trailerId, settrailerId] = useState(null) //OR
   const dispatch = useDispatch()
@@ -21,8 +23,8 @@ const useMovieTrailer = () => {
     //  console.log(json);
 
     const filterData = json.results.filter((video) => video.type == "Trailer");
-    const trailer = filterData ? filterData[0] : json.results[0];
-    //console.log("1st index trailer", trailer);
+    const trailer = filterData ? filterData[1] : json.results[0];
+    console.log("1st index trailer", trailer);
 
     dispatch(addTrailerVideo(trailer));
 
@@ -32,6 +34,7 @@ const useMovieTrailer = () => {
   };
 
   useEffect(() => {
+    if(!trailerVideo)
     getMovieVideos();
   }, []);
 
