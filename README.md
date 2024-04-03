@@ -40,6 +40,7 @@
    - Gpt Search Bar
 - (BONUS) Multi-language Feature in our App 
 - Integrate GPT APIS, GPT(get OpenApi key)
+- Memoization && process.env file added
 
 
 # Features
