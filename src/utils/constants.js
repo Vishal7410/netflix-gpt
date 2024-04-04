@@ -8,9 +8,7 @@ export const API_OPTION = {
     method: 'GET',
     headers: {
       accept: 'application/json',
-      
-      Authorization: "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzZjM1NGI2NTc5YzUxODUwYzIzMzczZjQwYmEyMTZlNCIsInN1YiI6IjY1ZjcyZGMwZDhmNDRlMDE2MzRmYjZiNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.F82euH840U9IGg3RtlJUPt8RQb2gXUHi-7981EcQtXQ" ,
-      // Authorization: "Bearer " +process.env.REACT_APP_TMDB_KEY insted of above
+       Authorization: "Bearer " +process.env.REACT_APP_TMDB_KEY 
     },
   };
 
@@ -25,5 +23,4 @@ export const API_OPTION = {
 // you get these API from the platform.openai.com // you get these API Keys. & you have to create your Api keyse 
 // keep it secreate
 
-export const OPENAI_KEY = "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" // use these insted of these
-//export const OPENAI_KEY = process.env.REACT_APP_OPENAI_KEY 
+export const OPENAI_KEY = process.env.REACT_APP_OPENAI_KEY 
