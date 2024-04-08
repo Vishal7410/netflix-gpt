@@ -1,5 +1,4 @@
 /* eslint-disable no-undef */
-import { Processor } from "postcss";
 
 export const Logo = "https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png"
 
@@ -11,8 +10,8 @@ export const API_OPTION = {
     method: 'GET',
     headers: {
       accept: 'application/json',
-       Authorization: "Bearer "//eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzZjM1NGI2NTc5YzUxODUwYzIzMzczZjQwYmEyMTZlNCIsInN1YiI6IjY1ZjcyZGMwZDhmNDRlMDE2MzRmYjZiNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.F82euH840U9IGg3RtlJUPt8RQb2gXUHi-7981EcQtXQ
-       + import.meta.env.REACT_APP_TMDB_KEY 
+       Authorization: "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzZjM1NGI2NTc5YzUxODUwYzIzMzczZjQwYmEyMTZlNCIsInN1YiI6IjY1ZjcyZGMwZDhmNDRlMDE2MzRmYjZiNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.F82euH840U9IGg3RtlJUPt8RQb2gXUHi-7981EcQtXQ"
+      //  + import.meta.env.REACT_APP_TMDB_KEY 
     },
   };
 
@@ -28,6 +27,7 @@ export const API_OPTION = {
 // keep it secreate
 
 
- export const OPENAI_KEY = import.meta.env.REACT_APP_OPENAI_KEY
+//  export const OPENAI_KEY = import.meta.env.REACT_APP_OPENAI_KEY
+ export const OPENAI_KEY = "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"
 
 

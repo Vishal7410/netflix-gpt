@@ -14,6 +14,7 @@ const GptMovieSuggestion = () => {
           <MovieList
             key={movieName}
             title={movieNames}
+            // eslint-disable-next-line no-undef
             movies={movieResults[index]}
           />
         ))}

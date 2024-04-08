@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { auth } from "../utils/firebase";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { addUser, removeUser } from "../utils/userSlice";
 import { Logo, SUPPORTED_LANGUAGE } from "../utils/constants";
 import { toggleGptSearchView } from "../utils/gptSlice";
-import lang from "../utils/languageConstant";
 import { changeLanguage } from "../utils/configSlice";
 
 const Header = () => {
@@ -61,11 +60,12 @@ const showGptSearch = useSelector((store) => store.gpt.showGptSearch)
     dispatch(changeLanguage(e.target.value))
   }
   return (
-    <div className="absolute px-8 py-2 w-screen bg-gradient-to-b from-black z-10 flex justify-between">
-      <img className="w-44 " src={Logo} alt="Logo" />
+    <div className="absolute w-screen px-8 py-2 bg-gradient-to-b from-black z-10 flex flex-col  md:flex-row justify-between
+    ">
+      <img className="w-44 mx-auto md:mx-0" src={Logo} alt="Logo" />
 
       {user && (
-        <div className="flex p-2 ">
+        <div className="flex p-2 justify-between ">
           {showGptSearch && (<select className="p-2 m-2 bg-gray-900 text-white" 
           onChange={handleLanguageChange}>
             {SUPPORTED_LANGUAGE.map((lang) => (
@@ -80,10 +80,10 @@ const showGptSearch = useSelector((store) => store.gpt.showGptSearch)
             className="py-2 px-4 mx-4 my-2 text-white bg-purple-800 rounded-lg"
             onClick={handleGptSearch}
           >
-            {showGptSearch? "HomePage" :  "GPT Search" }
+            {showGptSearch? "HomePage":"GPT Search" }
            
           </button>
-          <img className="w-12 h-12" src={user.photoURL} alt="user Icon" />
+          <img className="hidden md:block w-12 h-12" src={user.photoURL} alt="user Icon" />
 
           <button onClick={handleSignOut} className="font-bold text-white">
             (Sign Out)
